@@ -1,9 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>accounts</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Accounts</ion-title>
+    </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+    <ion-list>
+        <ion-item *ngFor="let person of this.people">
+            <ion-label>
+                {{person.vulgo}}
+            </ion-label>
+            <ion-badge color="primary">{{person.statistics}}</ion-badge>
+            <ion-icon slot="end" name="settings-outline"></ion-icon>
+        </ion-item>
+    </ion-list>
 </ion-content>

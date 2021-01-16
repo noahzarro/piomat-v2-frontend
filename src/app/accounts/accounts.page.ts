@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from './../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-accounts',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountsPage implements OnInit {
 
-  constructor() { }
+  people = []
+
+  ionViewDidEnter() {
+    this.getPeople();
+  }
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
+
+  getPeople() {
+    this.http.get(environment.baseUrl + 'people').toPromise().then((people) => { this.people = people['people'] })
+  }
+
 
 }
