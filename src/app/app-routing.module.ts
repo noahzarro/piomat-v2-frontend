@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'account-modal',
+    loadChildren: () => import('./account-modal/account-modal.module').then( m => m.AccountModalPageModule)
   }
 ];
 

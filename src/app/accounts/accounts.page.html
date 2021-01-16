@@ -13,7 +13,7 @@
                 {{person.vulgo}}
             </ion-label>
             <ion-badge color="primary">{{person.statistics}}</ion-badge>
-            <ion-icon slot="end" name="settings-outline"></ion-icon>
+            <ion-icon slot="end" name="settings-outline" (click)="editPerson()"></ion-icon>
         </ion-item>
     </ion-list>
 </ion-content>
