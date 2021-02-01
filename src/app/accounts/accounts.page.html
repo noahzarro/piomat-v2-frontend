@@ -8,12 +8,15 @@
 </ion-header>
 <ion-content>
     <ion-list>
+        <ion-item>
+            <ion-button color="success" (click)="newPerson()">Account Erstellen</ion-button>
+        </ion-item>
         <ion-item *ngFor="let person of this.people">
             <ion-label>
                 {{person.vulgo}}
             </ion-label>
             <ion-badge color="primary">{{person.statistics}}</ion-badge>
-            <ion-icon slot="end" name="settings-outline" (click)="editPerson()"></ion-icon>
+            <ion-icon slot="end" name="settings-outline" (click)="editPerson(person.uid)"></ion-icon>
         </ion-item>
     </ion-list>
 </ion-content>

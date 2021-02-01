@@ -1,9 +1,56 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title>Account Bearbeiten</ion-title>
-        <ion-button color="danger" slot="end" (click)="this.modalCtrl.dismiss()" style="padding-right: 10pt;">Cancel</ion-button>
+        <ion-button color="danger" slot="end" (click)="this.modalCtrl.dismiss()" style="padding-right: 8pt;">Cancel</ion-button>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-
+    <ion-item>
+        <ion-label position="floating">Vorname</ion-label>
+        <ion-input [(ngModel)]="surname"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Nachname</ion-label>
+        <ion-input [(ngModel)]="lastname"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Vulgo</ion-label>
+        <ion-input [(ngModel)]="vulgo"></ion-input>
+    </ion-item>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="3" *ngFor="let card of cards">
+                <ion-card>
+                    <ion-card-content>
+                        <ion-card-title>
+                            Karte
+                        </ion-card-title>
+                        {{card}}
+                        <ion-button color="danger" (click)="removeCard(card)">
+                            Löschen
+                        </ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col size="3">
+                <ion-card>
+                    <ion-card-content>
+                        <ion-card-title>
+                            Karte
+                        </ion-card-title>
+                        -
+                        <ion-button color="success" (click)="addCard()">
+                            Hinzufügen
+                        </ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button slot="end" color="success" style="padding-right: 8pt;" (click)="save()">Speichern</ion-button>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Account Bearbeiten</ion-title>
+        <ion-button color="danger" slot="end" (click)="this.modalCtrl.dismiss({found:false, card_uid:'' })" style="padding-right: 8pt;">Cancel</ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="xc fullheight">
+        <ion-card>
+            <ion-card-content>
+                <ion-card-title class="xc">
+                    Karte Bitte
+                </ion-card-title>
+                <br>
+                <div class="xc">
+                    <ion-spinner color="primary">
+                    </ion-spinner>
+                </div>
+                <br> Heb dini Charte uf de Leser bitte!
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

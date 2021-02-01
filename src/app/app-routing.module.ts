@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'account-modal',
     loadChildren: () => import('./account-modal/account-modal.module').then( m => m.AccountModalPageModule)
+  },
+  {
+    path: 'card-modal',
+    loadChildren: () => import('./card-modal/card-modal.module').then( m => m.CardModalPageModule)
   }
 ];
 

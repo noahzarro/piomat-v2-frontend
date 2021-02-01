@@ -22,16 +22,43 @@ export class AccountsPage implements OnInit {
   }
 
   getPeople() {
-    this.http.get(environment.baseUrl + 'people').toPromise().then((people) => { this.people = people['people'] })
+    this.http.get(environment.baseUrl + 'people').toPromise().then((people) => { this.people = people['people']; console.log(this.people) })
   }
 
-  async editPerson() {
+  async editPerson(uid) {
+    let person = this.people.find(person => person.uid == uid)
+    let person_data = {
+      is_new: false,
+      uid: person.uid,
+      surname: person.surname,
+      lastname: person.lastname,
+      vulgo: person.vulgo,
+      cards: person.cards
+    }
+    this.openAccountModal(person_data)
+  }
+
+  async newPerson() {
+    let person_data = {
+      is_new: true,
+      uid: 0,
+      surname: "",
+      lastname: "",
+      vulgo: "",
+      cards: []
+    }
+    this.openAccountModal(person_data)
+  }
+
+  async openAccountModal(data){
     const modal = await this.modalController.create({
       component: AccountModalPage,
-      cssClass: 'my-custom-class'
+      componentProps: data
     });
-    return await modal.present();
+    await modal.present();
+    modal.onDidDismiss().then(() => this.getPeople())
   }
+
 
 
 }
