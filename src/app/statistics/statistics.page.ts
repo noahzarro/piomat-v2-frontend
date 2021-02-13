@@ -11,20 +11,69 @@ import { Chart } from 'chart.js';
 })
 export class StatisticsPage implements OnInit {
 
-  @ViewChild('barChart') barChart;
+  @ViewChild('todayChart') todayChart;
+  @ViewChild('foreverChart') foreverChart;
 
-  bars: any;
+  todayBars: any;
+  foreverBars: any;
   colorArray: any;
+  totalPios = 0;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   ionViewDidEnter() {
-    this.createBarChart();
+    this.createTodayBarChart();
+    this.createForeverBarChart();
+    this.calculateTotalPios();
   }
 
-  createBarChart() {
+  calculateTotalPios() {
+    this.http.get(environment.baseUrl + 'people').toPromise().then((people => {
+      people["people"].forEach(person => {
+        this.totalPios += person["statistics"]
+      });
+    }))
+  }
+
+  createTodayBarChart() {
+    this.http.get(environment.baseUrl + 'people').toPromise().then((people => {
+
+      let names = []
+      let statistics = []
+
+      people['people'].sort((first, second) => { return second['today'] - first['today'] }).forEach(person => {
+        names.push(person['vulgo'])
+        statistics.push(person['today'])
+      });
+
+      this.todayBars = new Chart(this.todayChart.nativeElement, {
+        type: 'bar',
+        data: {
+          labels: names,
+          datasets: [{
+            label: 'Pör hüt gesufft',
+            data: statistics,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgb(54, 162, 235)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    }))
+  }
+
+  createForeverBarChart() {
     this.http.get(environment.baseUrl + 'people').toPromise().then((people => {
 
       let names = []
@@ -35,12 +84,12 @@ export class StatisticsPage implements OnInit {
         statistics.push(person['statistics'])
       });
 
-      this.bars = new Chart(this.barChart.nativeElement, {
+      this.foreverBars = new Chart(this.foreverChart.nativeElement, {
         type: 'bar',
         data: {
           labels: names,
           datasets: [{
-            label: 'Pör gesufft',
+            label: 'Pör total gesufft',
             data: statistics,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgb(54, 162, 235)',

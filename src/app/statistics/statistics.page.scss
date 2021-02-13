@@ -1,0 +1,13 @@
+.pulsate {
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulsate {
+    0% {}
+    50% {
+        color: red;
+        font-size: xx-large;
+    }
+    100% {}
+}

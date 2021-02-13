@@ -48,6 +48,7 @@ export class HomePage implements OnInit {
             // balance sufficient, subtract price, increment statistics
             person_data["balance"] -= environment.pioPrice;
             person_data["statistics"]++;
+            person_data["today"]++;
             // send updated person info
             this.http.put(environment.baseUrl + 'people/' + person_data["uid"], person_data).toPromise().then(() => {
               this.http.get(environment.baseUrl + 'success');

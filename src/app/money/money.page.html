@@ -30,7 +30,7 @@
                                     </b>
                                 </ion-col>
                                 <ion-col>
-                                    Calmo <br> 124.65 Fr.
+                                    {{sender["vulgo"]}} <br> {{sender["balance"]}} Fr.
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
@@ -52,20 +52,20 @@
                         <ion-card-title>
                             Betrag
                         </ion-card-title>
-                        <ion-card-content>
-                            <ion-item lines="none">
-                                <ion-icon name="remove" slot="start"></ion-icon>
-                                <ion-label>
-                                    0 Fr.
-                                </ion-label>
-                                <ion-icon name="add" slot="end"></ion-icon>
-
-                            </ion-item>
-                            <ion-button>
-                                Überweisen
-                            </ion-button>
-                        </ion-card-content>
                     </ion-card-header>
+                    <ion-card-content>
+                        <ion-item lines="none">
+                            <ion-icon name="remove" slot="start" size="large" (click)="decreaseAmount()"></ion-icon>
+                            <ion-label>
+                                {{amount}} Fr.
+                            </ion-label>
+                            <ion-icon name="add" slot="end" size="large" (click)=" increaseAmount() "></ion-icon>
+                        </ion-item>
+                        <ion-range min="0 " max="100 " pin="true" [(ngModel)]="amount " style="padding-top: 10px; "></ion-range>
+                        <ion-button>
+                            Überweisen
+                        </ion-button>
+                    </ion-card-content>
                 </ion-card>
             </ion-col>
 
@@ -81,7 +81,7 @@
                     <ion-card-content>
                         <ion-grid>
                             <ion-row>
-                                <ion-col size="6">
+                                <ion-col size=" 6 ">
                                     <b>
                                       Name:
                                     </b>
@@ -90,7 +90,7 @@
                                     </b>
                                 </ion-col>
                                 <ion-col>
-                                    Master <br> 100.00 Fr.
+                                    {{receiver["vulgo "]}} <br> {{receiver["balance "]}} Fr.
                                 </ion-col>
                             </ion-row>
 
