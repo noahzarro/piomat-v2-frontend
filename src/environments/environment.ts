@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:5080/'
+  baseUrl: 'http://localhost:5080/',
+  pioPrice: 75
 };
 
 /*
