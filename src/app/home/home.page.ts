@@ -30,7 +30,6 @@ export class HomePage implements OnInit {
     }).then((toast) => { toast.present() });
   }
 
-  // TODO: Make only image clickable
 
   async buyPio() {
     const modal = await this.modalCtrl.create({
