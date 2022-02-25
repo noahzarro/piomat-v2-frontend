@@ -51,7 +51,7 @@ export class HomePage implements OnInit {
             person_data["today"]++;
             // send updated person info
             this.http.put(environment.baseUrl + 'people/' + person_data["uid"], person_data).toPromise().then(() => {
-              this.http.get(environment.baseUrl + 'success');
+              this.http.get(environment.baseUrl + 'success').toPromise()
               this.http.get(environment.baseUrl + 'quote').toPromise().then((quote_data) => {
                 this.quote = quote_data["quote"]
                 this.author = quote_data["author"]
@@ -61,19 +61,19 @@ export class HomePage implements OnInit {
           }
           else {
             // balance was to low
-            this.http.get(environment.baseUrl + 'failure')
+            this.http.get(environment.baseUrl + 'failure').toPromise()
             this.displayToast("Zwenig Geld", "danger");
           }
         }
         ).catch(() => {
           // owner not found
-          this.http.get(environment.baseUrl + 'failure')
+          this.http.get(environment.baseUrl + 'failure').toPromise()
           this.displayToast("Die Charte ghört niemertem", "danger");
         })
       }
       else {
         // no card found
-        this.http.get(environment.baseUrl + 'failure')
+        this.http.get(environment.baseUrl + 'failure').toPromise()
         this.displayToast("Kei Charte gfunde", "danger");
       }
     })

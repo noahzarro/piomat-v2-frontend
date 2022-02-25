@@ -1,5 +1,10 @@
 # Frontend
 
+## Setup
+- open in DevContainer
+- run `npm i`
+- run `ionic serve`
+
 ## Pages
 
 ### Home
