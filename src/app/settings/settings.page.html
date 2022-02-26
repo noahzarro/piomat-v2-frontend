@@ -10,50 +10,79 @@
 <ion-content>
     <ion-grid>
         <br>
-        <ion-row>
-            <ion-title>
-                System
-            </ion-title>
-        </ion-row>
-        <ion-row>
-            <ion-col class="xc">
-                <ion-button color="danger">
-                    Herunterfahren
-                </ion-button>
-            </ion-col>
-            <ion-col class="xc">
-                <ion-button color="danger">
-                    Neustart
-                </ion-button>
-            </ion-col>
-            <ion-col class="xc">
-                <ion-button color="danger">
-                    Backup
-                </ion-button>
-            </ion-col>
-            <ion-col class="xc">
-                <ion-button color="danger" (click)="newDay()">
-                    Neuer Abend
-                </ion-button>
-            </ion-col>
-        </ion-row>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>
+                    System
+                </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-row>
+                    <ion-col class="xc">
+                        <ion-button color="danger">
+                            Herunterfahren
+                        </ion-button>
+                    </ion-col>
+                    <ion-col class="xc">
+                        <ion-button color="danger">
+                            Neustart
+                        </ion-button>
+                    </ion-col>
+                    <ion-col class="xc">
+                        <ion-button color="danger">
+                            Backup
+                        </ion-button>
+                    </ion-col>
+                    <ion-col class="xc">
+                        <ion-button color="danger" (click)="newDay()">
+                            Neuer Abend
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
         <br>
-        <ion-row>
-            <ion-col>
-                <ion-title>
-                    Wifis
-                </ion-title>
+        
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>
+                    Neues Wifi
+                </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
 
+                <ion-item>
+                    <ion-label position="floating">SSID</ion-label>
+                    <ion-input [(ngModel)]="new_ssid"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Passwort</ion-label>
+                    <ion-input [(ngModel)]="new_password"></ion-input>
+                </ion-item>
+                <br>
+                <ion-button (click)="addWifi()">Wifi Hinzuefüege</ion-button>
+            </ion-card-content>
+        </ion-card>
+
+        <br>
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>
+                    Wifis
+                </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
                 <ion-list>
                     <ion-item *ngFor="let wifi of this.wifis">
                         <ion-label>
                             {{wifi.ssid}}
                         </ion-label>
-                        <ion-icon slot="end" name="settings-outline"></ion-icon>
+                        <ion-icon slot="end" name="trash-outline" (click)="deleteWifi(wifi.ssid)"></ion-icon>
                     </ion-item>
                 </ion-list>
+            </ion-card-content>
+        </ion-card>
 
-            </ion-col>
-        </ion-row>
     </ion-grid>
 </ion-content>
