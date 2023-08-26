@@ -32,7 +32,10 @@ export class StatisticsPage implements OnInit {
   calculateTotalPios() {
     this.http.get(environment.baseUrl + 'people').toPromise().then((people => {
       people["people"].forEach(person => {
-        this.totalPios += person["statistics"]
+        if (person["uid"] != 0) // do not include master in statistics
+        {
+          this.totalPios += person["statistics"]
+        }
       });
     }))
   }
@@ -44,8 +47,10 @@ export class StatisticsPage implements OnInit {
       let statistics = []
 
       people['people'].sort((first, second) => { return second['today'] - first['today'] }).forEach(person => {
-        names.push(person['vulgo'])
-        statistics.push(person['today'])
+        if (person["uid"] != 0) { // do not include master into statistics
+          names.push(person['vulgo'])
+          statistics.push(person['today'])
+        }
       });
 
       this.todayBars = new Chart(this.todayChart.nativeElement, {
@@ -80,8 +85,10 @@ export class StatisticsPage implements OnInit {
       let statistics = []
 
       people['people'].sort((first, second) => { return second['statistics'] - first['statistics'] }).forEach(person => {
-        names.push(person['vulgo'])
-        statistics.push(person['statistics'])
+        if (person["uid"] != 0) { // do not include master into statistics
+          names.push(person['vulgo'])
+          statistics.push(person['statistics'])
+        }
       });
 
       this.foreverBars = new Chart(this.foreverChart.nativeElement, {

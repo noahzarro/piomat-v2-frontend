@@ -69,6 +69,33 @@ export class SettingsPage implements OnInit {
     })
   }
 
+  shutdown() {
+    this.backup()
+    this.http.get(environment.baseUrl + 'shutdown').toPromise().then(
+      () =>
+      this.displayToast("Abefahre in 10s", "success")
+    )
+  }
+
+  reboot() {
+    this.backup()
+    this.http.get(environment.baseUrl + 'reboot').toPromise().then(
+      () =>
+      this.displayToast("Neustart in 10s", "success")
+    )
+
+  }
+
+  backup() {
+    this.http.get(environment.baseUrl + 'backup').toPromise().then(
+      () =>
+      this.displayToast("Backup isch erstellt worde!", "success")
+    ).catch(
+      () =>
+      this.displayToast("Backup het nöd klappet. Internet verbindig prüefe!", "danger")
+    )
+  }
+
   newDay() {
     this.alertController.create({
       header: 'Neue Obig?',
@@ -79,7 +106,10 @@ export class SettingsPage implements OnInit {
         }, {
           text: 'Jo',
           handler: () => {
-            this.http.delete(environment.baseUrl + 'people/new_day').toPromise().then()
+            this.http.delete(environment.baseUrl + 'people/new_day').toPromise().then(
+              () =>
+              this.displayToast("Neue Obig isch gstartet. Zum wohl", "success")
+            )
           }
         }
       ]

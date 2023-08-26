@@ -19,17 +19,17 @@
             <ion-card-content>
                 <ion-row>
                     <ion-col class="xc">
-                        <ion-button color="danger">
+                        <ion-button color="danger" (click)="shutdown()">
                             Herunterfahren
                         </ion-button>
                     </ion-col>
                     <ion-col class="xc">
-                        <ion-button color="danger">
+                        <ion-button color="danger" (click)="reboot()">
                             Neustart
                         </ion-button>
                     </ion-col>
                     <ion-col class="xc">
-                        <ion-button color="danger">
+                        <ion-button color="danger" (click)="backup()">
                             Backup
                         </ion-button>
                     </ion-col>

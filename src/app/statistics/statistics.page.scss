@@ -11,3 +11,28 @@
     }
     100% {}
 }
+
+@keyframes firework {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(10);
+      opacity: 0;
+    }
+  }
+
+  /* Create a CSS class for the firework effect */
+  .firework {
+    display: inline-block;
+    animation: firework 1s ease-in-out forwards;
+    animation-iteration-count: infinite;
+    transform-origin: center;
+    //font-size: 24px;
+    color: red;
+  }

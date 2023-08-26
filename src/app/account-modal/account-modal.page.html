@@ -20,7 +20,7 @@
     <ion-grid>
         <ion-row>
             <ion-col size="3" *ngFor="let card of cards">
-                <ion-card>
+                <ion-card style="min-width: fit-content;">
                     <ion-card-content>
                         <ion-card-title>
                             Karte
@@ -33,13 +33,13 @@
                 </ion-card>
             </ion-col>
             <ion-col size="3">
-                <ion-card>
+                <ion-card style="min-width: fit-content;">
                     <ion-card-content>
                         <ion-card-title>
                             Karte
                         </ion-card-title>
                         -
-                        <ion-button color="success" (click)="addCard()">
+                        <ion-button color="success" style="max-width: 100%;" (click)="addCard()">
                             Hinzufügen
                         </ion-button>
                     </ion-card-content>
