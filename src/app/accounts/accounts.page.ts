@@ -25,8 +25,29 @@ export class AccountsPage implements OnInit {
     this.http.get(environment.baseUrl + 'people').toPromise().then((people) => { this.people = people['people']; console.log(this.people) })
   }
 
+  async getStickerName(sid) {
+    console.log("requesting name: " + sid.toString())
+    let name = await this.http.get(environment.baseUrl + 'stickers/name/' + sid.toString()).toPromise().then(
+      (response) => {
+        console.log("got name: " + sid.toString())
+        return response["name"]
+      }
+    )
+    return name
+  }
+
+  async getStickerNames(stickers_collection: Array<number>) {
+    let sticker_names = {}
+    for (let sid of stickers_collection){
+      let name = await this.getStickerName(sid)
+      sticker_names[sid] = name
+    }
+    return sticker_names
+  }
+
   async editPerson(uid) {
     let person = this.people.find(person => person.uid == uid)
+    let sticker_names = await this.getStickerNames(person.stickers.collection)
     let person_data = {
       is_new: false,
       uid: person.uid,
@@ -35,7 +56,8 @@ export class AccountsPage implements OnInit {
       vulgo: person.vulgo,
       cards: person.cards,
       stickers_collection: person.stickers.collection,
-      stickers_selected: person.stickers.selected
+      stickers_selected: person.stickers.selected,
+      sticker_names: sticker_names
     }
     this.openAccountModal(person_data)
   }

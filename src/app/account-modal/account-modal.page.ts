@@ -20,7 +20,7 @@ export class AccountModalPage implements OnInit {
   @Input() cards: Array<string>;
   @Input() stickers_collection: Array<number>;
   @Input() stickers_selected: number;
-  stickers_images: Object;
+  @Input() sticker_names: Object;
 
   constructor(public modalCtrl: ModalController, public alertController: AlertController, private toastController: ToastController, private http: HttpClient) { }
 
@@ -54,21 +54,10 @@ export class AccountModalPage implements OnInit {
 
   }
 
-  getStickerImageURL(sticker) {
-    return environment.baseUrl + 'stickers/image/' + sticker.toString()
+  getStickerImageURL(sid) {
+    return environment.baseUrl + 'stickers/image/' + sid.toString()
   }
 
-  async getStickerName(sticker) {
-    console.log("requesting name: " + sticker.toString())
-    let name = await this.http.get(environment.baseUrl + 'stickers/name/' + sticker.toString()).toPromise().then(
-      (response) => {
-        console.log("got name: " + sticker.toString())
-        return response["name"]
-        // TODO: FIX this
-      }
-    )
-    return name
-  }
 
   async addCard() {
     const modal = await this.modalCtrl.create({

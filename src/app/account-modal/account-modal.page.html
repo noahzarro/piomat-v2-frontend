@@ -52,7 +52,7 @@
                     <ion-card-content>
                         <img alt="Sticker" [src]="getStickerImageURL(sticker)" />
                         <ion-card-title>
-                            {{getStickerName(sticker) | async}}
+                            {{sticker_names[sticker]}}
                         </ion-card-title>
                         
                         <ion-button color="success" (click)="select(card)">
