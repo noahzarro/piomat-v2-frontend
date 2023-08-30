@@ -64,6 +64,7 @@ export class AccountModalPage implements OnInit {
       (response) => {
         console.log("got name: " + sticker.toString())
         return response["name"]
+        // TODO: FIX this
       }
     )
     return name
