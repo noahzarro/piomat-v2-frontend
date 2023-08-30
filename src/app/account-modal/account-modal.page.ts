@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account-modal',
@@ -18,10 +18,22 @@ export class AccountModalPage implements OnInit {
   @Input() lastname: string;
   @Input() vulgo: string;
   @Input() cards: Array<string>;
+  @Input() stickers_collection: Array<number>;
+  @Input() stickers_selected: number;
+  stickers_images: Object;
 
-  constructor(public modalCtrl: ModalController, public alertController: AlertController, private http: HttpClient) { }
+  constructor(public modalCtrl: ModalController, public alertController: AlertController, private toastController: ToastController, private http: HttpClient) { }
 
   ngOnInit() {
+  }
+
+  displayToast(message: string, color: string) {
+    this.toastController.create({
+      message: message,
+      position: 'top',
+      duration: 7500,
+      color: color
+    }).then((toast) => { toast.present() });
   }
 
   removeCard(card_uid) {
@@ -42,6 +54,21 @@ export class AccountModalPage implements OnInit {
 
   }
 
+  getStickerImageURL(sticker) {
+    return environment.baseUrl + 'stickers/image/' + sticker.toString()
+  }
+
+  async getStickerName(sticker) {
+    console.log("requesting name: " + sticker.toString())
+    let name = await this.http.get(environment.baseUrl + 'stickers/name/' + sticker.toString()).toPromise().then(
+      (response) => {
+        console.log("got name: " + sticker.toString())
+        return response["name"]
+      }
+    )
+    return name
+  }
+
   async addCard() {
     const modal = await this.modalCtrl.create({
       component: CardModalPage,
@@ -51,8 +78,17 @@ export class AccountModalPage implements OnInit {
     modal.onDidDismiss().then((return_data) => {
       console.log(return_data)
       if (return_data.data.found) {
-        this.cards.push(return_data.data.card_uid)
+        const card_uid = return_data.data.card_uid 
+        if (this.cards.includes(card_uid)) {
+          this.displayToast("Die Charte hesch scho inzuegfüegt - Trottel", "danger")
+          return
+        }
+        this.cards.push(card_uid)
+        this.displayToast("Charte erfolgrich hinzuegfüegt", "success")
         console.log(this.cards)
+      }
+      else {
+        this.displayToast("Charte hinzuefüege het nöd klappet", "danger")
       }
     })
 

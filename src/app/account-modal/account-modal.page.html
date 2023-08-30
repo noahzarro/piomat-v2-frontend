@@ -46,6 +46,22 @@
                 </ion-card>
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col size="3" *ngFor="let sticker of stickers_collection">
+                <ion-card style="min-width: fit-content;">
+                    <ion-card-content>
+                        <img alt="Sticker" [src]="getStickerImageURL(sticker)" />
+                        <ion-card-title>
+                            {{getStickerName(sticker) | async}}
+                        </ion-card-title>
+                        
+                        <ion-button color="success" (click)="select(card)">
+                            Uswähle
+                        </ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
     </ion-grid>
 </ion-content>
 

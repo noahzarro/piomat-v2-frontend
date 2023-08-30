@@ -33,7 +33,9 @@ export class AccountsPage implements OnInit {
       surname: person.surname,
       lastname: person.lastname,
       vulgo: person.vulgo,
-      cards: person.cards
+      cards: person.cards,
+      stickers_collection: person.stickers.collection,
+      stickers_selected: person.stickers.selected
     }
     this.openAccountModal(person_data)
   }
@@ -45,7 +47,9 @@ export class AccountsPage implements OnInit {
       surname: "",
       lastname: "",
       vulgo: "",
-      cards: []
+      cards: [],
+      stickers_collection: [0],
+      stickers_selected: 0
     }
     this.openAccountModal(person_data)
   }
